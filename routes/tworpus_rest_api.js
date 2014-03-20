@@ -3,7 +3,8 @@ var dbConf = require('../conf/db_conf').DbConf,
     https = require('https'),
     cheerio = require("cheerio"),
     twitterDb = require("../crawler/TweetFetcher").TwitterDb,
-    Long = require('mongodb').Long;
+    Long = require('mongodb').Long,
+    json2csv = require('json2csv');
 
 /**
  * Returns total number of indexed tweets
@@ -29,7 +30,8 @@ exports.getTweets = function(req, res) {
         startDate = req.query.startdate,
         enddate = req.query.enddate,
         lang  = req.query.language,
-        langs = req.query.languages;
+        langs = req.query.languages,
+        fs = require('fs');
 
     var filter = {};
     if(langs) filter.languages = langs.split(',');
@@ -40,8 +42,19 @@ exports.getTweets = function(req, res) {
     filter.endDate = enddate;
 
     var success = function(tweets) {
-        res.send(tweets);
-//        res.send(500, {error: "Failure during retrieving tweets"});
+//        @TODO switch return format (json, csv...)
+//        console.log(tweets)
+//        res.send(tweets);
+//        return;
+
+        json2csv({data: tweets, fields: ['tweet_id', 'userid', 'language']}, function (err, csv) {
+            if (err) console.log(err);
+            console.log(csv);
+            res.set('Content-disposition', 'attachment; filename=testing.csv');
+            res.set('Content-Type', 'text/csv');
+            res.send(csv);
+        });
+
     };
     var error = function(err) {
         res.send(500, {error: "Failure during retrieving tweets"});

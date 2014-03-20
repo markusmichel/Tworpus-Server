@@ -96,3 +96,7 @@ app.post('/api/v1/sockets/emit/progress/:socketid', function(req, res) {
 
     res.send("foo");
 });
+
+
+
+require('./conf/db_conf').DbConf.createConnection();

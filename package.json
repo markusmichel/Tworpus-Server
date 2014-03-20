@@ -13,6 +13,7 @@
       "ntwitter": "*",
       "nunjucks": "*",
       "cheerio": "*",
-      "socket.io": "0.9"
+      "socket.io": "0.9",
+      "json2csv": "*"
   }
 }
