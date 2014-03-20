@@ -2,21 +2,20 @@
  * GET home page.
  */
 
+/*
 var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+	, dbConf = require("../conf/db_conf").DbConf;
+*/
+exports.index = function (req, res) {
 
-exports.index = function(req, res){
+	res.render('index.html');
 
-    MongoClient.connect('mongodb://127.0.0.1:27017/Tworpus', function(err, db) {
-        if(err) throw err;
-
-        var collection = db.collection('Node_Tweet');
-
-
-        var length = collection.find({}).count(function(err, count) {
-            res.render('index', { length: count });
-            db.close();
-        });
-    });
-
+	/*
+	dbConf.createConnection(function (db) {
+		var collection = db.collection(dbConf.collection);
+		var length = collection.find({}).sort(['timestamp']).(function (err, tweets) {
+			res.render('index.html', { length: count });
+		});
+	});
+	*/
 };

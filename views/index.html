@@ -1,14 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/res/css/datepicker.css" type="text/css" rel="stylesheet">
+    <link href="/res/css/style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/libs/inheritance-2.7.js"></script>
+    <script type="text/javascript" src="/libs/ns.js"></script>
+    <script type="text/javascript" src="/libs/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/libs/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/download/vis_info.js"></script>
+    <script type="text/javascript" src="/download/dc_info.js"></script>
+    <script type="text/javascript" src="/js/App.js"></script>
+    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-    Template:
-    {{ foo }}
-    {{ foo | replace("bar", "test") | capitalize }}
-<p>
-    {{ "<span>" }}
-</p>
+    <header class="header">
+        <div class="content">
+            <div class="tworpus"><a href="index.html">Tworpus</a></div>
+            <div class="navi">
+                <div class="navi-btn">About</div>
+                <div class="navi-btn">Stats</div>
+                <div class="navi-btn">Software</div>
+                <div class="navi-btn">Community</div>
+            </div>
+        </div>
+    </header>
+    <div class="about center">
+        <div class="headline">An Easy-to-Use Tool for the Creation of Tailored Twitter Corpora</div>
+        <p>Tworpus allows scholars to create corpora without having to know about the Twitter Application Programming Interface (API) and related technical aspects. At the same time our tool complies with Twitter’s ”rules of the road” on how to use tweet data. Corpora may be composed in various sizes and for specific scenarios, as the Tworpus interface provides controls for filtering and gathering customized collections of tweets, which may serve as the basis for subsequent analyses.</p>
+        <p>For more details see:</p>
+        <p><a class="plainLink" href="http://link.springer.com/chapter/10.1007/978-3-642-40722-2_3">Bazo, A., Burghardt, M. & Wolff, C. (2013). TWORPUS An Easy-to-Use Tool for the Creation of Tailored Twitter Corpora. </a><br />In Gurevych, I., Biemann, C. & Zesch, T. (eds.): GSCL 2013, LNAI 8105 'Language Processing and Knowledge in the Web', pp. 23-34. Springer, Berlin Heidelberg.</p>
+    </div>
+    <div class="stats center">
+        <div class="headline">Tworpus Stats</div>
+        <div class="numbers">
+            <div class="left">
+                <div class="status">Current Status</div>
+                <div class="content">crawling tweets</div>
+            </div>
+
+            <div class="right">
+                <div class="time">Timespan</div>
+
+                <div class="content">from: <input type="text" value="02-16-2012" id="dateFrom" > - to <input type="text" value="02-16-2012" id="dateTo" ></div>
+            </div>
+            <div class="middle">
+                <div class="archived">Archived Tweets</div>
+                <div class="content">50.356.957 tweets in 8 languages</div>
+            </div>
+        </div>
+        <div class="languages-title">Tweets by languages</div>
+        <div class="languages">
+            <div class="en">{{length}}</div>
+            <div class="es">5</div>
+            <div class="pt">1235</div>
+            <div class="fr">54654</div>
+            <div class="tr">9789</div>
+            <div class="it">355</div>
+            <div class="nl">4534</div>
+            <div class="de">21312</div>
+        </div>
+    </div>
+    <div class="software center">
+        <div class="headline">Software</div>
+        You can download the desktop client to restore your Twitter corpus with a corpus file from this website. The tool is available as an app for OS X and for other operating systems as a JAVA executable.
+        <div class="download-btn">Download</div>
+    </div>
+    <div class="community center">
+        <div class="headline">Visualisations & Data Converter</div>
+        Here you can get custom Visualisations and Data Converter for the desktop client made by the community. <p>If you wrote a Visualization or a Data Converter feel free to contribute it to the community.</p><p> Just mail us, attach the plugin and add a screenshot and some description to it.</p>
+        <div class="upload-btn">Contribute</div>
+        <div class="visualisations-btn">Visualisations</div>
+        <div class="dataconverter-btn">Data Converter</div>
+        <div class="visualisations-container"></div>
+        <div class="dataconverter-container"></div>
+        </div>
+    <div class="overlay"></div>
+    <div class="item-detail-view">
+        <div class="close"></div>
+        <div class="item-detail-view-img"></div>
+        <div class="item-detail-view-title"></div>
+        <div class="item-detail-view-desc"></div>
+        <div class="download-btn">Download</div>
+    </div>
+    <footer>
+        <div class="disclaimer">©2014 Tworpus <a class="plainLink" href="../../Tworpus-Website/html/disclaimer.html">Contact / Disclaimer</a></div>
+        <div class="information">We do not store any tweet texts or personal twitter user data. This webpage, our Twitter metadata crawler and the retrieval tool are available under the GPL v.3 license. Tworpus is a non commercial service distributed by the media informatics group (University Regensburg). If you have any questions or feedback please contact: <a class="plainLink" href="mailTo:alexander.bazo@ur.de">alexander.bazo@ur.de</a></div>
+    </footer>
 </body>
 </html>

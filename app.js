@@ -18,7 +18,6 @@ var http = require('http'),
     twitter = require('ntwitter'),
     crawler = require('./crawler/crawler');
 
-
 var dbConf = require('./conf/db_conf').DbConf;
 var twit = require('./conf/twitter_conf').TwitterConf;
 

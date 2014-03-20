@@ -1,0 +1,404 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.plainLink:hover {
+   color: #fff;
+}
+
+body {
+    margin: 70px 0 0 0;
+    font-family: 'Oswald', Arial, Verdana, sans-serif;
+    cursor: default;
+    background: #fff none;
+    line-height: 1.618;
+}
+
+.headline {
+    text-align: center;
+    font-size: 30px;
+    margin: 0 0 25px 0;
+}
+
+.center {
+    width: 1024px;
+    margin: 25px auto;
+    padding:25px;
+}
+
+.header  {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100000;
+    background: #252E2A none;
+    color: #fff;
+}
+
+.header .content {
+    width: 1024px;
+    margin: 0 auto;
+    height: 70px;
+}
+
+.header .tworpus {
+    float: left;
+    font-size: 34px;
+    letter-spacing: 3px;
+    margin: 10px 0 0;
+    font-weight: bold;
+}
+
+.header .navi {
+    float: right;
+    margin: 27px 0 0 0;
+}
+
+.navi-btn {
+    cursor: pointer;
+    margin: 0 10px 0 10px;
+}
+
+.navi-btn:hover {
+    color: #DFFB3F;
+}
+
+.header .navi > *{
+    display: inline;
+    width: 200px;
+}
+
+.software {
+    text-align: center;
+    background: #252E2A none;
+    color: #fff;
+}
+
+.software .download-btn {
+    background: transparent url(../gfx/download.png) center center no-repeat;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 25px;
+    height: 15px;
+    margin: 25px auto;
+    padding-top: 55px;
+    width: 110px;
+}
+
+.software .download-btn:hover {
+    background: transparent url(../gfx/download_hover.png) center center no-repeat;
+}
+
+.community {
+    background: #252E2A none;
+    text-align: center;
+    color: #fff;
+}
+
+.community .upload-btn {
+    background: transparent url(../gfx/upload.png) center center no-repeat;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 25px;
+    height: 15px;
+    margin: 25px auto;
+    padding-top: 55px;
+    width: 110px;
+}
+
+.community .upload-btn:hover {
+    background: transparent url(../gfx/upload_hover.png) center center no-repeat;
+}
+
+.community .visualisations-btn, .community .dataconverter-btn {
+    cursor: pointer;
+    width: 150px;
+    height: 35px;
+    padding-top: 10px;
+    margin-top: 25px;
+}
+
+.community .visualisations-btn {
+    background: transparent url(../gfx/visualisations.png) right center no-repeat;
+    padding-right: 10px;
+    display: inline-block;
+    margin-right: 150px;
+}
+
+.community .visualisations-btn:hover, .community .visualisations-btn.active {
+    background: transparent url(../gfx/visualisations_hover.png) right center no-repeat;
+}
+
+.community .dataconverter-btn {
+    background: transparent url(../gfx/dataconverter.png) left center no-repeat;
+    padding-left: 18px;
+    display: inline-block;
+    margin-left: 150px;
+}
+
+.community .dataconverter-btn:hover, .community .dataconverter-btn.active {
+    background: transparent url(../gfx/dataconverter_hover.png) left center no-repeat;
+}
+
+.community .visualisations-container, .community .dataconverter-container {
+    height: 0;
+    overflow: hidden;
+}
+
+.community .visualisation-item {
+    cursor: pointer;
+    height: 105px;
+    display: inline-block;
+    margin: 20px 20px 0;
+    font-size: 13px;
+    overflow: hidden;
+}
+
+.community .visualisation-item:hover {
+    color: #DFFB3F;
+}
+
+.community .visualisation-item .visualisation-item-img {
+    width: 75px;
+    height: 75px;
+    background-size: cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.community .visualisation-item .visualisation-item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 75px;
+    margin-bottom: 5px;
+}
+
+.community .dataconverter-item {
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 13px;
+    overflow: hidden;
+    border: 2px solid #fff;
+    padding: 10px;
+}
+
+.community .dataconverter-item:hover {
+    color: #DFFB3F;
+}
+
+.community .visualisation-item .visualisation-item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.item-detail-view {
+    width: 600px;
+    height: 600px;
+    display: none;
+    top: 15%;
+    left: 50%;
+    margin-left: -350px;
+    padding: 50px;
+    position: fixed;
+    background: #fff none;
+    z-index: 1000;
+}
+
+.item-detail-view .item-detail-view-img{
+    width: 250px;
+    height: 250px;
+    background: transparent none no-repeat center center;
+    background-size: cover;
+    border: 2px solid #000000;
+    float: left;
+}
+
+.item-detail-view .item-detail-view-title {
+    float: right;
+    vertical-align: middle;
+    text-align: center;
+    height: 150px;
+    width: 346px;
+    padding-top: 100px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.no-image-title {
+    width: 600px !important;
+    padding-top: 0 !important;
+    height: 50px !important;
+}
+
+.no-image {
+    width: 0 !important;
+    height: 0 !important;
+    border: none !important;
+    background: none;
+}
+
+.item-detail-view .item-detail-view-desc {
+    clear: both;
+    padding-top: 25px;
+    overflow: hidden;
+    height: 255px;
+    font-size: 13px;
+}
+
+.item-detail-view .download-btn {
+    background: transparent url(../gfx/download.png) center center no-repeat;
+    cursor: pointer;
+    font-size: 21px;
+    height: 15px;
+    padding-top: 55px;
+    width: 78px;
+    position: absolute;
+    left: 311px;
+    bottom: 40px;
+}
+
+.item-detail-view .download-btn:hover {
+    background: transparent url(../gfx/download_hover.png) center center no-repeat;
+}
+
+.item-detail-view .close {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 655px;
+    top: 5px;
+    background: transparent url(../gfx/cross.png) no-repeat center center;
+    cursor: pointer;
+}
+
+.item-detail-view .close:hover {
+    background: transparent url(../gfx/cross_hover.png) no-repeat center center;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: #000 none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+}
+
+.stats {
+    background: #252E2A none;
+    color: #fff;
+    text-align: center;
+}
+
+.stats .numbers {
+    height: 100px;
+}
+
+.stats .numbers > * {
+    text-align: center;
+}
+
+.stats .left {
+    float: left;
+    height: 100px;
+}
+
+.stats .middle {
+    margin: 0 auto;
+    height: 100px;
+    width: 300px;
+}
+
+.stats .right {
+    float: right;
+    height: 100px;
+}
+
+.stats .content {
+    text-align: center;
+    margin: 10px 0 0 0;
+}
+
+.stats .archived, .stats .status, .stats .time {
+    padding: 5px 0 0 45px;
+    height: 30px;
+}
+
+.stats .archived {
+    background: transparent url(../gfx/archived.png) 70px center no-repeat;
+    padding: 5px 0 0 45px;
+    height: 30px;
+}
+
+.stats .status {
+    background: transparent url(../gfx/check.png) left center no-repeat;
+}
+
+.stats .time {
+    background: transparent url(../gfx/clock.png) left center no-repeat;
+}
+
+.stats .languages-title {
+    text-align: center;
+    width: 100%;
+    margin: 40px 0 0 0;
+}
+
+.stats .languages > * {
+    height: 30px;
+    padding: 10px 0 0 60px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.stats .languages .en {
+    background: transparent url(../gfx/languages/United-Kingdom.png) left center no-repeat;
+}
+
+.stats .languages .es {
+    background: transparent url(../gfx/languages/Spain.png) left center no-repeat;
+}
+
+.stats .languages .pt {
+    background: transparent url(../gfx/languages/Portugal.png) left center no-repeat;
+}
+
+.stats .languages .fr {
+    background: transparent url(../gfx/languages/France.png) left center no-repeat;
+}
+
+.stats .languages .tr {
+    background: transparent url(../gfx/languages/Turkey.png) left center no-repeat;
+}
+
+.stats .languages .it {
+    background: transparent url(../gfx/languages/Italy.png) left center no-repeat;
+}
+
+.stats .languages .nl {
+    background: transparent url(../gfx/languages/Netherlands.png) left center no-repeat;
+}
+
+.stats .languages .de {
+    background: transparent url(../gfx/languages/Germany.png) left center no-repeat;
+}
+
+footer {
+    position: relative;
+    font-size: 13px;
+    text-align: center;
+    bottom: 0;
+    width: 1024px;
+    left: 50%;
+    margin-left: -512px;
+    z-index: 500;
+}
