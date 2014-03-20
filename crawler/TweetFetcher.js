@@ -48,8 +48,8 @@ TwitterDb.prototype.find = function(filterParams, callback, errcb) {
         filter.$and.push(langFilter);
     }
 
-    console.log(filterParams);
-    console.log(filter);
+//    console.log(filterParams);
+//    console.log(filter);
 
     var that = this;
     this.db(function(db) {
