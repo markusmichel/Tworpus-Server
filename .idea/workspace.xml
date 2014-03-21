@@ -35,16 +35,16 @@
       <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/res/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="344" column="19" selection-start="6694" selection-end="6694" vertical-scroll-proportion="-22.16" vertical-offset="5294" max-vertical-offset="7412">
+            <state line="6" column="17" selection-start="91" selection-end="91" vertical-scroll-proportion="-4.08" vertical-offset="0" max-vertical-offset="7412">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/index.html">
+      <file leaf-file-name="disclaimer.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/html/disclaimer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="34" selection-start="2829" selection-end="2829" vertical-scroll-proportion="-17.0" vertical-offset="323" max-vertical-offset="1462">
+            <state line="10" column="64" selection-start="363" selection-end="363" vertical-scroll-proportion="0.272" vertical-offset="0" max-vertical-offset="867">
               <folding />
             </state>
           </provider>
@@ -77,10 +77,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tworpus_rest_api.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="tworpus_rest_api.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/tworpus_rest_api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="0" selection-start="1978" selection-end="1978" vertical-scroll-proportion="0.2816265" vertical-offset="867" max-vertical-offset="3944">
+            <state line="62" column="0" selection-start="1978" selection-end="1978" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="3944">
               <folding />
             </state>
           </provider>
@@ -136,11 +136,12 @@
         <option value="$PROJECT_DIR$/public/libs/ns.js" />
         <option value="$PROJECT_DIR$/public/libs/moment-min.js" />
         <option value="$PROJECT_DIR$/public/res/css/pikaday.css" />
-        <option value="$PROJECT_DIR$/views/index.html" />
-        <option value="$PROJECT_DIR$/public/res/css/style.css" />
         <option value="$PROJECT_DIR$/public/js/App.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/tworpus_rest_api.js" />
+        <option value="$PROJECT_DIR$/public/res/css/style.css" />
+        <option value="$PROJECT_DIR$/views/index.html" />
+        <option value="$PROJECT_DIR$/public/html/disclaimer.html" />
       </list>
     </option>
   </component>
@@ -362,6 +363,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tworpus_Crawler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tworpus-Server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -754,11 +773,6 @@
         <state line="1" column="0" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/html/disclaimer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="1" selection-start="880" selection-end="880" vertical-scroll-proportion="-15.038462" vertical-offset="0" max-vertical-offset="867" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/file.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="897" />
@@ -832,20 +846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="34" selection-start="2829" selection-end="2829" vertical-scroll-proportion="-17.0" vertical-offset="323" max-vertical-offset="1462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/res/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="344" column="19" selection-start="6694" selection-end="6694" vertical-scroll-proportion="-22.16" vertical-offset="5294" max-vertical-offset="7412">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="94" column="24" selection-start="2439" selection-end="2442" vertical-scroll-proportion="-8.32" vertical-offset="1390" max-vertical-offset="4845">
@@ -862,7 +862,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/tworpus_rest_api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="1978" selection-end="1978" vertical-scroll-proportion="0.2816265" vertical-offset="867" max-vertical-offset="3944">
+        <state line="62" column="0" selection-start="1978" selection-end="1978" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="3944">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/res/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="91" selection-end="91" vertical-scroll-proportion="-4.08" vertical-offset="0" max-vertical-offset="7412">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="64" selection-start="974" selection-end="996" vertical-scroll-proportion="0.2384" vertical-offset="174" max-vertical-offset="1462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/html/disclaimer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="64" selection-start="363" selection-end="363" vertical-scroll-proportion="0.272" vertical-offset="0" max-vertical-offset="867">
           <folding />
         </state>
       </provider>
