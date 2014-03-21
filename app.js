@@ -53,15 +53,15 @@ app.get("/test", user.list);
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-app.get('/api/v1/tweets/count', tworpusApi.numTweets);
 app.get('/api/v1/tweets/find',  tworpusApi.getTweets);
+app.get('/api/v1/tweets/count/:language', tworpusApi.getTweetsCount);
+app.get('/api/v1/tweets/crawlstatus', tworpusApi.getCrawlStatus);
+app.get('/api/v1/tweets/oldesttimestamp', tworpusApi.getOldestTs);
 app.get('/api/v1/unavailable',  tworpusApi.tweetUnavailable);
-
 
 server.listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
-
 
 var clients = [];
 io.sockets.on('connection', function (socket) {

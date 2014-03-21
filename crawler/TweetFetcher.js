@@ -21,7 +21,7 @@ TwitterDb.prototype.getNumTweets = function(callback, errcb) {
  * Find Tweets specified by filter parameters.
  * Parameters are:
  * - languages: array. ex: ['de', 'en']
- * - limit: int. Dedault 100
+ * - limit: int. Default 100
  * - startDate: timestamp
  * - endDate: timestamp
  * @param callback

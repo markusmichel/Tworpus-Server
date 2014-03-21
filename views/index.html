@@ -3,17 +3,16 @@
 <head>
     <meta charset="utf-8">
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="/res/css/datepicker.css" type="text/css" rel="stylesheet">
+    <link href="/res/css/pikaday.css" type="text/css" rel="stylesheet">
     <link href="/res/css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/libs/inheritance-2.7.js"></script>
     <script type="text/javascript" src="/libs/ns.js"></script>
     <script type="text/javascript" src="/libs/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="/libs/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="/libs/moment-min.js"></script>
+    <script type="text/javascript" src="/libs/pikaday.js"></script>
     <script type="text/javascript" src="/download/vis_info.js"></script>
     <script type="text/javascript" src="/download/dc_info.js"></script>
     <script type="text/javascript" src="/js/App.js"></script>
-    <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -34,34 +33,23 @@
         <p><a class="plainLink" href="http://link.springer.com/chapter/10.1007/978-3-642-40722-2_3">Bazo, A., Burghardt, M. & Wolff, C. (2013). TWORPUS An Easy-to-Use Tool for the Creation of Tailored Twitter Corpora. </a><br />In Gurevych, I., Biemann, C. & Zesch, T. (eds.): GSCL 2013, LNAI 8105 'Language Processing and Knowledge in the Web', pp. 23-34. Springer, Berlin Heidelberg.</p>
     </div>
     <div class="stats center">
-        <div class="headline">Tworpus Stats</div>
+        <div class="headline no-margin">Tworpus Stats</div>
+        <div class="timespan">
+            from:    <input type="text" id="dateFrom">
+            to: <input type="text" id="dateTo">
+        </div>
         <div class="numbers">
-            <div class="left">
+            <div class="text-left">
                 <div class="status">Current Status</div>
-                <div class="content">crawling tweets</div>
+                <div class="content crawling-status"></div>
             </div>
-
-            <div class="right">
-                <div class="time">Timespan</div>
-
-                <div class="content">from: <input type="text" value="02-16-2012" id="dateFrom" > - to <input type="text" value="02-16-2012" id="dateTo" ></div>
-            </div>
-            <div class="middle">
+            <div class="text-right">
                 <div class="archived">Archived Tweets</div>
-                <div class="content">50.356.957 tweets in 8 languages</div>
+                <div class="content total-tweets"></div>
             </div>
         </div>
         <div class="languages-title">Tweets by languages</div>
-        <div class="languages">
-            <div class="en">{{length}}</div>
-            <div class="es">5</div>
-            <div class="pt">1235</div>
-            <div class="fr">54654</div>
-            <div class="tr">9789</div>
-            <div class="it">355</div>
-            <div class="nl">4534</div>
-            <div class="de">21312</div>
-        </div>
+        <div class="languages"></div>
     </div>
     <div class="software center">
         <div class="headline">Software</div>

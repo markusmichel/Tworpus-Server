@@ -7,17 +7,6 @@ var dbConf = require('../conf/db_conf').DbConf,
     json2csv = require('json2csv');
 
 /**
- * Returns total number of indexed tweets
- * @param req
- * @param res
- */
-exports.numTweets = function(req, res) {
-    twitterDb.getNumTweets(function(count) {
-        res.send({count: count});
-    });
-};
-
-/**
  * Returns indexed tweets.
  * Filter params:
  * - language: ISO-639 language code
@@ -58,10 +47,75 @@ exports.getTweets = function(req, res) {
     };
     var error = function(err) {
         res.send(500, {error: "Failure during retrieving tweets"});
-    }
+    };
     twitterDb.find(filter, success, error);
-
 };
+
+/**
+ * Returns number of tweets by language.
+ * Filter params:
+ * - language: ISO-639 language codes
+ */
+exports.getTweetsCount = function(req, res) {
+	var lang = req.params.language;
+	var startDate = parseInt(req.query.startdate);
+	var	endDate = parseInt(req.query.enddate);
+
+	var filter = {};
+	filter.$and = [{
+		timestamp: {$gte: startDate}
+	}, {
+		timestamp: {$lte: endDate}
+	}, {
+		language: lang
+	}];
+
+	dbConf.createConnection(function(db) {
+		var collection = db.collection(dbConf.collection);
+		collection.find(filter).count(function(err, data) {
+			res.send({count: data});
+		});
+	});
+
+	var error = function(err) {
+		res.send(500, {error: "Failure during retrieving tweets"});
+	};
+};
+
+/**
+ * Returns status of crawler
+ */
+exports.getCrawlStatus = function(req, res) {
+
+	// time difference between now and newest tweet should be maximum one hour in ms
+	var allowedTimeDiff = 3600000;
+	var newestTs = 0;
+	var status = 1;
+
+	dbConf.createConnection(function(db) {
+		var collection = db.collection(dbConf.collection);
+			collection.find().limit(1).sort({timestamp: -1}).toArray(function(err, data) {
+				newestTs = data[0].timestamp;
+				if (new Date().getTime() - newestTs > allowedTimeDiff) status = 0;
+
+				res.send({status: status});
+			});
+	});
+};
+
+/**
+ * Returns oldest timestamp
+ */
+exports.getOldestTs = function(req, res) {
+
+	dbConf.createConnection(function(db) {
+		var collection = db.collection(dbConf.collection);
+		collection.find().limit(1).sort({timestamp: 1}).toArray(function(err, data) {
+			res.send({timestamp: data[0].timestamp})
+		});
+	});
+};
+
 
 /**
  * Message from a client, that a specific tweet/list of tweets isn't available anymore.

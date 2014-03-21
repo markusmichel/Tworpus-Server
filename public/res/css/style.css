@@ -243,6 +243,10 @@ body {
     background: none;
 }
 
+.no-margin {
+    margin: 0;
+}
+
 .item-detail-view .item-detail-view-desc {
     clear: both;
     padding-top: 25px;
@@ -297,54 +301,77 @@ body {
     background: #252E2A none;
     color: #fff;
     text-align: center;
+    min-height: 185px;
 }
 
 .stats .numbers {
-    height: 100px;
+    margin: 40px 0 0 0;
 }
 
 .stats .numbers > * {
-    text-align: center;
-}
-
-.stats .left {
-    float: left;
-    height: 100px;
-}
-
-.stats .middle {
-    margin: 0 auto;
-    height: 100px;
+    display: inline-block;
     width: 300px;
 }
 
-.stats .right {
-    float: right;
-    height: 100px;
-}
-
-.stats .content {
-    text-align: center;
+.stats .text-left {
     margin: 10px 0 0 0;
+    text-align: left;
 }
 
-.stats .archived, .stats .status, .stats .time {
-    padding: 5px 0 0 45px;
-    height: 30px;
+.stats .text-right {
+    margin: 10px 0 0 0;
+    text-align: right;
+
 }
 
 .stats .archived {
-    background: transparent url(../gfx/archived.png) 70px center no-repeat;
-    padding: 5px 0 0 45px;
-    height: 30px;
+    background: transparent url(../gfx/archived.png) right center no-repeat;
+    padding-right: 50px;
 }
 
 .stats .status {
+    padding-left: 50px;
+}
+
+.stats .numbers .text-left .content {
+    margin: 10px 0 0 0;
+    padding-left: 50px;
+    color: #DFFB3F;
+}
+
+.stats .numbers .text-right .content {
+    margin: 10px 0 0 0;
+    padding-right: 50px;
+    color: #DFFB3F;
+}
+
+.stats .status.inactive {
+    background: transparent url(../gfx/cross_red.png) left center no-repeat;
+
+}
+
+.stats .status.active {
     background: transparent url(../gfx/check.png) left center no-repeat;
 }
 
-.stats .time {
-    background: transparent url(../gfx/clock.png) left center no-repeat;
+
+.stats .languages-title {
+    padding-top: 6px;
+}
+
+.stats .timespan input {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #DFFB3F;
+    width: 80px;
+    margin: 0 5px 0 5px;
+    color: #DFFB3F;
+    cursor: pointer;
+    font-family: 'Oswald',Arial,Verdana,sans-serif;
+    text-align: center;
+}
+
+.stats .timespan input:hover {
+    color: #FFFFFF;
 }
 
 .stats .languages-title {

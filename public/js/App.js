@@ -1,29 +1,106 @@
 $(document).ready(function() {
-
-	$.ajax({
-		url: "test.html"
-	}).done(function() {
-		TWRP.Data = [];
-		TWRP.App.instance = new TWRP.App();
-	});
+	TWRP.TweetLanguages = ['de', 'en', 'it', 'nl', 'pt', 'es', 'tr', 'fr'];
+	TWRP.TweetTimespan = {};
 
 	TWRP.PathToClient = "download/client/desktopclient.exe";
 
 	TWRP.MailAdressForPlugins = "daniel.riedmueller@ur.de";
 	TWRP.MailSubjectForPlugins = "Tworpus Visualisation / Data Converter Upload";
 	TWRP.MailBodyForPlugins = "Hello!%0A%0AThank you for your anticipation.%0APlease attach the plugin and add a screenshot, a title and some description.%0AYour plugin will be published soon so digital humanists, like you, can download it from the website and use it for their own purposes.%0A%0ABest regards, Tworpus Team";
+
+	TWRP.fetchData();
 });
 
 TWRP.ns('TWRP');
+TWRP.init = function(tweetsData) {
+	TWRP.App.instance = new TWRP.App(tweetsData);
+};
+
+TWRP.fetchData = function() {
+	TWRP.TweetTimespan.enddate = new Date().getTime();
+
+	var completedCalls = 0;
+	var neededCalls = 2;
+
+	var doneFetching = function() {
+		completedCalls++;
+		if (completedCalls == neededCalls) {
+			TWRP.fetchTweetCount(TWRP.init);
+		}
+	};
+
+	$.ajax({
+		url: "/api/v1/tweets/oldesttimestamp"
+	}).done(function(data) {
+		TWRP.TweetTimespan.startdate = data.timestamp;
+		doneFetching();
+	});
+
+	$.ajax({
+		url: "/api/v1/tweets/crawlstatus"
+	}).done(function(data) {
+		TWRP.setCrawlingStatus(data.status);
+		doneFetching();
+	});
+};
+
+TWRP.fetchTweetCount = function(callback) {
+	var tweetsData = {};
+
+	var completedCalls = 0;
+	var neededCalls = TWRP.TweetLanguages.length;
+
+	var doneFetching = function() {
+		completedCalls++;
+		if (completedCalls == neededCalls) {
+			callback(tweetsData);
+		}
+	};
+
+	tweetsData['languages'] = {};
+
+	$.each(TWRP.TweetLanguages, function(index, value) {
+		$.ajax({
+			url: "/api/v1/tweets/count/" + value + "?startdate=" + TWRP.TweetTimespan.startdate + "&enddate=" + TWRP.TweetTimespan.enddate
+		}).done(function(data) {
+			tweetsData['languages'][value] = data.count;
+			doneFetching();
+		})
+	});
+};
+
+TWRP.setCrawlingStatus = function(status) {
+	if (status == 1) {
+		$('.crawling-status').text("crawling tweets");
+		$('.status')
+			.removeClass('inactive')
+			.addClass('active');
+	} else {
+		$('.crawling-status').text("not crawling");
+		$('.status')
+			.removeClass('active')
+			.addClass('inactive');
+	}
+};
+
 TWRP.App = Class.extend({
 
-	initialize: function() {
-		this.initButtons();
+	initialize: function(tweetsData) {
+		this.initElements();
+		this.setStats(tweetsData);
 		this.initVisualisationsPane();
-		this.initDatepicker();
 	},
 
-	initButtons: function() {
+	initElements: function() {
+		var languagesContainer = $('.languages');
+		$.each(TWRP.TweetLanguages, function(key, value) {
+			var language = $('<div></div>')
+				.addClass(value)
+				.hide();
+			languagesContainer.append(language);
+		});
+
+
 		$('.navi-btn').click(function() {
 			$("html, body").animate({scrollTop: $('.' + $(this).text().toLocaleLowerCase()).position().top - $('.header').height() + "px" });
 		});
@@ -38,11 +115,62 @@ TWRP.App = Class.extend({
 
 		$('.close').click(this.hideDetailView);
 		$('.overlay').click(this.hideDetailView);
+
+
+		var me = this;
+		var dateFrom = $('#dateFrom').val(moment(TWRP.TweetTimespan.startdate).format('MM/DD/YYYY'));
+
+		new Pikaday({
+			field: dateFrom[0],
+			format: 'MM/DD/YYYY',
+			defaultDate: new Date(TWRP.TweetTimespan.startdate),
+			onSelect: function(date) {
+				TWRP.TweetTimespan.startdate = date.getTime();
+				TWRP.fetchTweetCount(me.setStats);
+			}
+		});
+
+		var dateTo = $('#dateTo').val(moment(TWRP.TweetTimespan.enddate).format('MM/DD/YYYY'));
+		new Pikaday({
+			field: dateTo[0],
+			format: 'MM/DD/YYYY',
+			defaultDate: new Date(TWRP.TweetTimespan.enddate),
+			onSelect: function(date) {
+				TWRP.TweetTimespan.enddate = date.getTime();
+				TWRP.fetchTweetCount(me.setStats);
+			}
+		});
+	},
+
+	setStats: function(tweetsData) {
+
+		var languagesContainer = $('.languages');
+
+		var totalLanguages = 0;
+		var totalTweets = 0;
+
+		$.each(tweetsData.languages, function(key, value) {
+
+			var langDiv = $('.' + key);
+			if (value == 0) langDiv.hide();
+			else {
+				langDiv
+					.text(value)
+					.fadeIn();
+
+				totalTweets += value;
+				totalLanguages++;
+			}
+
+
+		});
+
+		$('.total-tweets').text(totalTweets + " tweets in " + totalLanguages + " languages");
 	},
 
 	initVisualisationsPane: function() {
 		var visContainer = $('.visualisations-container');
-		var dcContainer = ($('.dataconverter-container'));
+		var dcContainer = $('.dataconverter-container');
 
 		var visBtn = $('.visualisations-btn');
 		var dcBtn = $('.dataconverter-btn');
@@ -148,37 +276,5 @@ TWRP.App = Class.extend({
 				height: 0
 			})
 		}
-	},
-
-	initDatepicker: function() {
-		$('#dp1').datepicker({
-			format: 'mm-dd-yyyy'
-		});
-
-		/*
-		var nowTemp = new Date();
-		var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-
-		var checkin = $('#dpd1').datepicker({
-			onRender: function(date) {
-				return date.valueOf() < now.valueOf() ? 'disabled' : '';
-			}
-		}).on('changeDate', function(ev) {
-			if (ev.date.valueOf() > checkout.date.valueOf()) {
-				var newDate = new Date(ev.date)
-				newDate.setDate(newDate.getDate() + 1);
-				checkout.setValue(newDate);
-			}
-			checkin.hide();
-			$('#dpd2')[0].focus();
-		}).data('datepicker');
-		var checkout = $('#dpd2').datepicker({
-			onRender: function(date) {
-				return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-			}
-		}).on('changeDate', function(ev) {
-			checkout.hide();
-		}).data('datepicker');
-		*/
 	}
 });
