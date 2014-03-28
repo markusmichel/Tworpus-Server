@@ -14,6 +14,7 @@ var dbConf = require('../conf/db_conf').DbConf,
  */
 exports.getTweets = function(req, res) {
     var limit = parseInt(req.query.limit) || 10,
+        format = req.query.format || "json",
         tweetCharCount = parseInt(req.query.charcount) || 0,
         tweetWordCount = parseInt(req.query.wordcount) || 0,
         startDate = req.query.startdate,
@@ -31,23 +32,27 @@ exports.getTweets = function(req, res) {
     filter.endDate = enddate;
 
     var success = function(tweets) {
-//        @TODO switch return format (json, csv...)
-//        console.log(tweets)
-//        res.send(tweets);
-//        return;
-
-        json2csv({data: tweets, fields: ['tweet_id', 'userid', 'language']}, function (err, csv) {
-            if (err) console.log(err);
-            console.log(csv);
-            res.set('Content-disposition', 'attachment; filename=testing.csv');
-            res.set('Content-Type', 'text/csv');
-            res.send(csv);
-        });
-
+        switch(format) {
+            case "csv":
+                json2csv({data: tweets, fields: ['tweetid', 'userid', 'language']}, function (err, csv) {
+                    if (err) console.log(err);
+                    console.log(csv);
+                    res.set('Content-disposition', 'attachment; filename=tweets.csv');
+                    res.set('Content-Type', 'text/csv');
+                    res.send(csv);
+                });
+                break;
+            case "json":
+            default:
+                res.send(tweets);
+                return;
+        }
     };
+
     var error = function(err) {
-        res.send(500, {error: "Failure during retrieving tweets"});
+        res.send(500, {error: "Failure while retrieving tweets"});
     };
+
     twitterDb.find(filter, success, error);
 };
 
@@ -143,7 +148,7 @@ exports.tweetUnavailable = function(req, res) {
         console.log("check if tweet is available");
         var collection = db.collection(dbConf.collection);
         collection.find({
-            tweet_id: tweetId,
+            tweetid: tweetId,
             userid: userId
         }).toArray(function(err, data) {
             if(err) {
@@ -165,7 +170,7 @@ exports.tweetUnavailable = function(req, res) {
 
                 // Tweet found and still exists --> do nothing
                 if(text.length > 0) {
-                    console.log("Tweet still exists so don't remove it")
+                    console.log("Tweet still exists so don't remove it", url);
 //                    res.send({removed: false});
                     return;
                 }
@@ -173,8 +178,8 @@ exports.tweetUnavailable = function(req, res) {
                 // Tweet doesn't exist anymore --> delete
                 else {
                     console.log("Didn't find tweet on twitter so remove it from the database");
-                    collection.remove({tweet_id: tweetId, userid: userId}, function(err, numRemoved) {
-                        console.log("removed: ", numRemoved)
+                    collection.remove({tweetid: tweetId, userid: userId}, function(err, numRemoved) {
+                        console.log("removed: ", numRemoved);
 //                        if(err) res.send(500, "Error removing tweet")
 //                        else if(numRemoved >= 1) res.send({removed: true});
 //                        else res.send({removed: false})
