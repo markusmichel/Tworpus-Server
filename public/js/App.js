@@ -88,7 +88,7 @@ TWRP.App = Class.extend({
 	initialize: function(tweetsData) {
 		this.initElements();
 		this.setStats(tweetsData);
-		this.initVisualisationsPane();
+		//this.initVisualisationsPane();
 	},
 
 	initElements: function() {

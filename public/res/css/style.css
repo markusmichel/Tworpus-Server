@@ -431,3 +431,9 @@ footer {
     margin-left: -512px;
     z-index: 500;
 }
+
+.is-selected .pika-button {
+    background-color: #DFFB3F;
+    box-shadow: 0 1px 3px #8EA314 inset;
+    color: #333333;
+}
