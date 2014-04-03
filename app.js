@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -47,37 +46,16 @@ if ('development' == app.get('env')) {
 // Route definitions
 app.get('/', routes.index);
 
-app.get('/api/v1/tweets/find',  tworpusApi.getTweets);
+app.get('/api/v1/tweets/find', tworpusApi.getTweets);
 app.get('/api/v1/tweets/count/:language', tworpusApi.getTweetsCount);
 app.get('/api/v1/tweets/crawlstatus', tworpusApi.getCrawlStatus);
 app.get('/api/v1/tweets/oldesttimestamp', tworpusApi.getOldestTs);
-app.get('/api/v1/unavailable',  tworpusApi.tweetUnavailable);
+app.get('/api/v1/unavailable', tworpusApi.tweetUnavailable);
 
-server.listen(app.get('port'), function(){
+server.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-//var CronJob = require('cron').CronJob;
-//new CronJob('*/5 * * * * *', function(){
-//    var dbConf = require("./conf/db_conf").DbConf;
-//    dbConf.createConnection(function(db) {
-//        var collection = db.collection(dbConf.collection);
-//
-//        collection.find({}).count(function(err, count) {
-//            console.log("database has " + count + " entries");
-//        });
-//
-//
-//        var cacheCollection = db.collection(dbConf.cacheCollection);
-//        cacheCollection.findOne({}, function(err, data) {
-//            console.log("data: ", data);
-//            data = data || {};
-//            data.count = "sdfed";
-//            cacheCollection.save(data);
-//        });
-//    });
-//
-//}, null, true, "Europe/Berlin");
-
-
 require('./conf/db_conf').DbConf.createConnection();
+
+require('./tworpus/cache_cronjob').start();

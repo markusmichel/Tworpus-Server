@@ -2,7 +2,7 @@ var dbConf = require('../conf/db_conf').DbConf,
     http = require('http'),
     https = require('https'),
     cheerio = require("cheerio"),
-    twitterDb = require("../crawler/TweetFetcher").TwitterDb,
+    twitterDb = require("../tworpus/TweetFetcher").TwitterDb,
     Long = require('mongodb').Long,
     json2csv = require('json2csv');
 
@@ -11,6 +11,10 @@ var dbConf = require('../conf/db_conf').DbConf,
  * Filter params:
  * - language: ISO-639 language code
  * - limit: Number of tweets to search
+ * - charcount
+ * - wordcount
+ * - startdate: startdate as timestamp in milliseconds
+ * - enddate: enddate as timestamp in milliseconds
  */
 exports.getTweets = function(req, res) {
     var limit = parseInt(req.query.limit) || 10,
@@ -19,7 +23,7 @@ exports.getTweets = function(req, res) {
         tweetWordCount = parseInt(req.query.wordcount) || 0,
         startDate = req.query.startdate,
         enddate = req.query.enddate,
-        lang  = req.query.language,
+//        lang  = req.query.language,
         langs = req.query.languages,
         fs = require('fs');
 
@@ -32,6 +36,13 @@ exports.getTweets = function(req, res) {
     filter.endDate = enddate;
 
     var success = function(tweets) {
+        tweets.splice(100, 50);
+
+        var status;
+        if      (tweets.length === 0)    status = 444;
+        else if (tweets.length >= limit) status = 200;
+        else                             status = 206;
+
         switch(format) {
             case "csv":
                 json2csv({data: tweets, fields: ['tweetid', 'userid', 'language']}, function (err, csv) {
@@ -39,12 +50,12 @@ exports.getTweets = function(req, res) {
                     console.log(csv);
                     res.set('Content-disposition', 'attachment; filename=tweets.csv');
                     res.set('Content-Type', 'text/csv');
-                    res.send(csv);
+                    res.send(status, csv);
                 });
                 break;
             case "json":
             default:
-                res.send(tweets);
+                res.send(status, tweets);
                 return;
         }
     };
@@ -66,19 +77,37 @@ exports.getTweetsCount = function(req, res) {
 	var startDate = parseInt(req.query.startdate);
 	var	endDate = parseInt(req.query.enddate);
 
+    moment = require("moment");
+    startDate = moment(startDate).hours(0).minutes(0).seconds(0).milliseconds(0).valueOf();
+    endDate = moment(endDate).hours(23).minutes(59).seconds(59).milliseconds(999).valueOf();
+
+
 	var filter = {};
 	filter.$and = [{
-		timestamp: {$gte: startDate}
+		_timestamp: {$gte: startDate}
 	}, {
-		timestamp: {$lte: endDate}
-	}, {
-		language: lang
+		_timestamp: {$lte: endDate}
 	}];
 
+    console.log(filter);
+    console.log(startDate);
+    console.log(endDate);
+
 	dbConf.createConnection(function(db) {
-		var collection = db.collection(dbConf.collection);
-		collection.find(filter).count(function(err, data) {
-			res.send({count: data});
+		var collection = db.collection(dbConf.cacheCollection);
+		collection.find(filter).toArray(function(err, data) {
+            console.log(data);
+            console.log("found ", data.length, " entries");
+            var count = 0;
+			for(var i in data) {
+                if(!data[i].languages) continue;
+                count += data[i].languages[lang];
+            }
+
+            res.send({
+                count: count,
+                language: lang
+            });
 		});
 	});
 
@@ -116,6 +145,7 @@ exports.getOldestTs = function(req, res) {
 	dbConf.createConnection(function(db) {
 		var collection = db.collection(dbConf.collection);
 		collection.find().limit(1).sort({timestamp: 1}).toArray(function(err, data) {
+            console.log(data);
 			res.send({timestamp: data[0].timestamp})
 		});
 	});

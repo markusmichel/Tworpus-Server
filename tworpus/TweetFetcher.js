@@ -27,9 +27,47 @@ TwitterDb.prototype.getNumTweets = function(callback, errcb) {
  * @param callback
  */
 TwitterDb.prototype.find = function(filterParams, callback, errcb) {
+    var filter = this.createFilter(filterParams);
+
+//    console.log(filterParams);
+//    console.log(filter);
+
+    var that = this;
+    this.db(function(db) {
+        db.collection(that.collectionName)
+            .find(filter)
+            .limit(filterParams.limit)
+            .toArray(function(err, data) {
+                if(err && errcb) {errcb(err); return;}
+                else if(err) callback({status: "failed", error: "true"})
+                callback(data);
+        });
+    });
+};
+
+
+TwitterDb.prototype.count = function(filterParams, callback, errcb) {
+    var filter = this.createFilter(filterParams);
+    var that = this;
+    this.db(function(db) {
+        db.collection(that.collectionName)
+            .find(filter)
+            .limit(filterParams.limit)
+            .count(function(err, data) {
+                if(err && errcb) {errcb(err); return;}
+                else if(err) callback({status: "failed", error: "true"})
+                callback(data);
+            });
+    });
+};
+
+
+TwitterDb.prototype.createFilter = function(filterParams) {
     filterParams = filterParams || {};
     filterParams.languages = filterParams.languages || [];
     filterParams.limit = filterParams.limit || 100;
+    filterParams.wordcount = filterParams.wordcount || 0;
+    filterParams.charcount = filterParams.charcount || 0;
     filterParams.startDate = parseInt(filterParams.startDate) || undefined;
     filterParams.endDate = parseInt(filterParams.endDate) || undefined;
 
@@ -48,22 +86,8 @@ TwitterDb.prototype.find = function(filterParams, callback, errcb) {
         filter.$and.push(langFilter);
     }
 
-//    console.log(filterParams);
-//    console.log(filter);
-
-    var that = this;
-    this.db(function(db) {
-        db.collection(that.collectionName)
-            .find(filter)
-            .limit(filterParams.limit)
-            .toArray(function(err, data) {
-                if(err && errcb) {errcb(err); return;}
-                else if(err) callback({status: "failed", error: "true"})
-                callback(data);
-        });
-    });
-}
-
+    return filter;
+};
 
 
 exports.TwitterDb = new TwitterDb();
