@@ -1,7 +1,7 @@
 TWRP.ns('VisInfo');
 TWRP.VisInfo = [{
 	path: "download/visualisations/tworpusExample.zip",
-	title: "Example",
+	title: "D3 Simple Bar Chart",
 	img: "download/visualisations/exampleImage.png",
-	desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla c"
+	desc: "Displays words and characters as vertical bar chart. Most common characters are on the top. Uses d3.js to create a simple bar chart."
 }];
