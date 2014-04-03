@@ -161,8 +161,6 @@ TWRP.App = Class.extend({
 				totalTweets += value;
 				totalLanguages++;
 			}
-
-
 		});
 
 		$('.total-tweets').text(totalTweets + " tweets in " + totalLanguages + " languages");
