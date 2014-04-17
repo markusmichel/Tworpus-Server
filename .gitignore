@@ -1,3 +1,5 @@
+conf/credentials.js
+
 # PHPStorm / WebStorm project foldeer
 .idea/*
 
