@@ -105,12 +105,12 @@ TWRP.App = Class.extend({
 			$("html, body").animate({scrollTop: $('.' + $(this).text().toLocaleLowerCase()).position().top - $('.header').height() + "px" });
 		});
 
-		$('.software .download-btn .apple').click(function() {
-			window.location = TWRP.PathToClient + "/apple/client.exe";
+		$('.software .download-btn .macos').click(function() {
+			window.location = TWRP.PathToClient + "/macos/client.exe";
 		});
 
-		$('.software .download-btn .linux').click(function() {
-			window.location = TWRP.PathToClient + "/linux/client.exe";
+		$('.software .download-btn .client').click(function() {
+			window.location = TWRP.PathToClient + "/client/client.exe";
 		});
 
 		$('.software .download-btn .windows').click(function() {
