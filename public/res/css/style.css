@@ -84,10 +84,16 @@ body {
     margin: 25px auto;
     padding-top: 55px;
     width: 110px;
+    display: inline-block;
 }
 
 .software .download-btn:hover {
     background: transparent url(../gfx/download_hover.png) center center no-repeat;
+}
+
+.software .download-btn img {
+    height: 32px;
+    padding-top: 20px;
 }
 
 .community {
