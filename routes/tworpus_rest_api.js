@@ -36,8 +36,6 @@ exports.getTweets = function(req, res) {
     filter.endDate = enddate;
 
     var success = function(tweets) {
-        tweets.splice(100, 50);
-
         var status;
         if      (tweets.length === 0)    status = 444;
         else if (tweets.length >= limit) status = 200;
