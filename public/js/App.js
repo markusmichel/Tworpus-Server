@@ -2,7 +2,7 @@ $(document).ready(function() {
 	TWRP.TweetLanguages = ['de', 'en', 'it', 'nl', 'pt', 'es', 'tr', 'fr'];
 	TWRP.TweetTimespan = {};
 
-	TWRP.PathToClient = "download/client/desktopclient.exe";
+	TWRP.PathToClient = "download/client/";
 
 	TWRP.MailAdressForPlugins = "daniel.riedmueller@ur.de";
 	TWRP.MailSubjectForPlugins = "Tworpus Visualisation / Data Converter Upload";
@@ -105,8 +105,16 @@ TWRP.App = Class.extend({
 			$("html, body").animate({scrollTop: $('.' + $(this).text().toLocaleLowerCase()).position().top - $('.header').height() + "px" });
 		});
 
-		$('.software .download-btn').click(function() {
-			window.location = TWRP.PathToClient;
+		$('.software .download-btn .macos').click(function() {
+			window.location = TWRP.PathToClient + "/macos/client.exe";
+		});
+
+		$('.software .download-btn .client').click(function() {
+			window.location = TWRP.PathToClient + "/client/client.exe";
+		});
+
+		$('.software .download-btn .windows').click(function() {
+			window.location = TWRP.PathToClient + "/windows/client.exe";
 		});
 
 		$('.upload-btn').click(function() {
