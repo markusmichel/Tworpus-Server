@@ -25,6 +25,7 @@ var conf = {
                     open = true;
                     database = db;
                     db.collection("tweets").ensureIndex( { "timestamp": -1 } );
+                    db.collection("tweets").ensureIndex( { "tweetid": 1 } );
                     if(cb) cb(db);
                 });
             });
